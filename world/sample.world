@@ -1,0 +1,63 @@
+include "sick.inc"
+include "map.inc"
+
+define topurg ranger
+(
+	sensor( 			
+    range [ 0.0  5.0 ]
+    fov 270.25
+    samples 1081
+  )
+
+  # generic model properties
+  color "black"
+  size [ 0.05 0.05 0.01 ]
+)
+
+define erratic position
+(
+	#Shape of robot
+	block
+	(
+		points 5
+		point[0] [0 0]
+        point[1] [1 0]
+        point[2] [1.46 0.5]
+		point[3] [1 1]
+		point[4] [0 1]                
+		z [0 1]
+	)
+	#fit shape to this size in meters
+	size [1 1 1]
+	gui_nose 1
+	drive "diff"
+	localization "odom"
+	odom_error [0.03 0.03 0.00 0.05]
+	topurg(pose [ 0.050 0.000 0 0.000 ])
+)
+
+
+# set the resolution of the underlying raytrace model in meters
+resolution 0.05
+
+interval_sim 100  # simulation timestep in milliseconds
+
+window
+(
+  size [ 635.000 666.000 ] # in pixels
+  scale 36.995   # pixels per meter			
+  show_data 1              # 1=on 0=off
+)
+
+# load an environment bitmap
+floorplan
+( 
+  name "cave"
+  size [16.000 16.000 2]
+  pose [0 0 0 0]
+  bitmap "cave.png"
+)
+
+# throw in a robot
+erratic( pose [ -7 -6 0 0 ] name "era" color "blue")
+#block( pose [ -13.924 25.020 0 180.000 ] color "red")

@@ -1,0 +1,25 @@
+<launch>
+  <param name="/use_sim_time" value="true"/>
+
+  <!-- MAP_SERVER -->
+  <node name="map_server" pkg="map_server" type="map_server" args="$(find world_test)/world/cave.yaml" />
+
+  <!-- MOVE_BASE -->
+  <node name="move_base_node" pkg="move_base" type="move_base" respawn="false">
+	<rosparam file="$(find path_planner)/costmap/costmap_common_params.yaml" command="load" ns="global_costmap" />
+	<rosparam file="$(find path_planner)/costmap/costmap_common_params.yaml" command="load" ns="local_costmap" />
+	<rosparam file="$(find path_planner)/costmap/local_costmap_params.yaml" command="load" />
+	<rosparam file="$(find path_planner)/costmap/global_costmap_params.yaml" command="load" />
+	<rosparam file="$(find path_planner)/costmap/base_local_planner_params.yaml" command="load" />
+  </node>
+
+  <!-- STAGEROS -->
+  <node name="stageros" pkg="stage_ros" type="stageros" args="$(find path_planner)/world/sample.world" />
+  
+  <!-- AMCL -->
+  <include file="$(find path_planner)/navigation/amcl_diff.launch" />
+  
+  <!-- RVIZ -->
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find path_planner)/rviz/custom.rviz" />
+  
+</launch>
