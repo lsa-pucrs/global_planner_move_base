@@ -20,7 +20,7 @@ The user must also have a working catkin workspace (http://wiki.ros.org/catkin/T
 ### Installation
 * Download and extract (or simply clone) the master branch on your catkin workspace "src" folder.
 * Install the package by running the "catkin_make" command on your catkin root folder.
-* Set up the proper environmental variables via the "source (your catkin workspace)/devel/setup.bash" command.
+* Set up the proper environmental variables via the "source <your catkin workspace>/devel/setup.bash" command.
 
 ## Usage
 To use the package, simply run:
@@ -38,7 +38,7 @@ If desired to change the map used in STAGE:
 * Create a black and white image, where black corresponds to the obstacles in your environment.
 * Change the "bitmap" field in the respective ".world" file to the name of your image.
 * An OccupancyGrid map of this environment must be generated, which can be done with the "gmapping" package (http://wiki.ros.org/gmapping). First open the stage_ros package with your ".world" file, then run the command "rosrun gmapping slam_gmapping /scan:=/base_scan". You must drive the robot around the map many times to get a good map.
-* Once mapping is complete, save the map with the map_server package. Run "rosrun map_server map_saver -f (filename)". Your map will be saved as a .pgm image and a YAML file.
+* Once mapping is complete, save the map with the map_server package. Run "rosrun map_server map_saver -f <filename>". Your map will be saved as a .pgm image and a YAML file.
 * Modify the "planner.launch" file to use the new environment. 
 
 ## Troubleshooting
