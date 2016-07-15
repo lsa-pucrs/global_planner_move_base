@@ -42,5 +42,7 @@ If desired to change the map used in STAGE:
 * Modify the "planner.launch" file to use the new environment. 
 
 ## Troubleshooting
-* RVIZ crashes unexpectedly before launching
+```
+RVIZ crashes unexpectedly before launching
+```
 Unknown bug, usually corrected by rerunning the "roslaunch path_planner planner.launch" command.
